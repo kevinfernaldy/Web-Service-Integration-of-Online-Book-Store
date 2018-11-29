@@ -16,8 +16,8 @@ http.createServer(function(request,response){
 	var url_parts = url.parse(request.url,true);
 	switch (url_parts.pathname){
 		case ("/validate"):
-			if (request.method == "GET"){
-				console.log("validate GET invoked");
+			if (request.method == "POST"){
+				console.log("validate POST invoked");
 				var validate_from_mysql = function(name, card_number){
 					var query = "SELECT * FROM nasabah WHERE name=\"" + name + "\" AND nomor_kartu=\"" + card_number +"\"";
 
@@ -35,10 +35,17 @@ http.createServer(function(request,response){
 					});
 				};
 
-				var name = url_parts.query.name;
-				var card_number = url_parts.query.card_number;
+				request.on("data", function(result) {
+					var data_splitted = result.toString().split("&");
+					var name = (data_splitted[0].split("="))[1];
+					var card_number = (data_splitted[1].split("="))[1];
+					name = name.split("+").join(" ");
 
-				validate_from_mysql(name,card_number);
+					console.log(name);
+					console.log(card_number);
+
+					validate_from_mysql(name,card_number);
+				});
 			} else {
 				response.writeHead(403);
 				response.end();
