@@ -1,7 +1,7 @@
 var http = require("http");
 var url = require("url");
 var mysql = require("mysql");
-var fs = require("fs");
+var crypto = require("crypto");
 
 var mysql_con = mysql.createConnection({host: "localhost", user: "root", password: "kevin007", port: 3307});
 mysql_con.connect(function(e) {
@@ -10,11 +10,6 @@ mysql_con.connect(function(e) {
 	mysql_con.query("USE node_js", function (e, result) {
 		if (e) throw e;
 	});
-});
-
-let transfer_get;
-fs.readFile('./html/transfer_get.html','ascii',function (e, data){
-	transfer_get = data;
 });
 
 http.createServer(function(request,response){
@@ -51,13 +46,38 @@ http.createServer(function(request,response){
 			break;
 		case ("/transfer"):
 			if (request.method == "POST"){
+				var generate_hotp = function(sender_card_num) {
+					const secret_key = crypto.randomBytes(16).toString();
+					const hash_sha256 = crypto.createHash('sha256');
+
+					var hashed_secret_key = hash_sha256.update(secret_key,'binary').digest('hex');
+
+					var token = "";
+					for (var i = 1; i < 9; i++){
+						token += hashed_secret_key.charAt(Math.pow(3,i) % 64);
+					}
+					var date = new Date();
+					date.setSeconds(date.getSeconds() + 180);
+					date = date.toISOString().slice(0, 19).replace("T", " ");
+
+					console.log("TOKEN = " + token);
+
+					var query = `DELETE FROM token WHERE nomor_kartu="${sender_card_num}"`;
+					mysql_con.query(query,null);
+					query = `INSERT INTO token VALUES ("${hashed_secret_key}","${sender_card_num}","${date}")`;
+					mysql_con.query(query,null);
+
+					response.writeHead(200);
+					response.end();
+				}
+
 				request.on('data', function(data) {
 					var data_splitted = data.toString().split("&");
 					
 					var sender_card_num = (data_splitted[0].split("="))[1];
 					var receiver_card_num = (data_splitted[1].split("="))[1];
 					var amount = (data_splitted[2].split("="))[1];
-
+					
 					var query = "SELECT saldo FROM nasabah WHERE nomor_kartu=\"" + sender_card_num + "\"";
 					mysql_con.query(query,function(e, result) {
 						if (e) throw e;
@@ -66,10 +86,7 @@ http.createServer(function(request,response){
 						if ((result[0].saldo - amount) >= 0){
 							console.log("Saldo cukup");
 							response.end("OK");
-
-							var query = "UPDATE nasabah SET saldo=" + (result[0].saldo - amount) + " WHERE nomor_kartu=\"" + sender_card_num + "\"";
-							
-							mysql_con.query(query,null);
+							generate_hotp(sender_card_num);
 						} else {
 							console.log("Saldo kurang");
 							response.end();

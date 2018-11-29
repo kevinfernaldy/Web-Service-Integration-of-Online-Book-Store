@@ -14,7 +14,7 @@
 				<p>Welcome,</p>
 				<div id=name><?php echo $name;?></div>
 			</div>
-			<form action="http://localhost:8081/transfer" method="post">
+			<form action="./validate.php" method="post">
 				<div class="table">
 					<table>
 						<tr>
