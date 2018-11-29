@@ -1,12 +1,16 @@
 package Main;
-import org.json.JSONObject;
 
-import BookService.getBooksByTitle;
+//import JsonBook.Book;
+import Publisher.Publisher;
 
-public class main {
+
+public class Main {
 	public static void main(String[] args) throws Exception {
-		String book_title = "Web";
-		String ret = BookService.getBooksByTitle.getBookByTitle(book_title);
-		JSONObject jsonObj = new JSONObject(ret);
+//		Book aBook = BookService.GetBookByID.getBookByID("zyTCAlFPjgYC");
+		Publisher.getBookByIDPublisher();
+		Publisher.getBookByTitlePublisher();
+		Publisher.getRecomendedBookPublisher();
+		Publisher.buyBookByIDPublisher();
+
 	}
 }
