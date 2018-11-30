@@ -3,7 +3,7 @@ var url = require("url");
 var mysql = require("mysql");
 var crypto = require("crypto");
 
-var mysql_con = mysql.createConnection({host: "localhost", user: "root", password: "ekasurya1997", port: 3306});
+var mysql_con = mysql.createConnection({host: "localhost", user: "root", password: "", port: 3306});
 mysql_con.connect(function(e) {
 	if (e) throw e;
 
@@ -53,6 +53,7 @@ http.createServer(function(request,response){
 			break;
 		case ("/transfer"):
 			if (request.method == "POST"){
+				console.log("transfer post");
 				var generate_hotp = function(sender_card_num) {
 					const secret_key = crypto.randomBytes(16).toString();
 					const hash_sha256 = crypto.createHash('sha256');
@@ -73,17 +74,15 @@ http.createServer(function(request,response){
 					mysql_con.query(query,null);
 					query = `INSERT INTO token VALUES ("${hashed_secret_key}","${sender_card_num}","${date}")`;
 					mysql_con.query(query,null);
-
-					response.writeHead(200);
-					response.end();
 				}
 
 				request.on('data', function(data) {
+					console.log(data.toString());
 					var data_splitted = data.toString().split("&");
 					
 					var sender_card_num = (data_splitted[0].split("="))[1];
-					var receiver_card_num = (data_splitted[1].split("="))[1];
-					var amount = (data_splitted[2].split("="))[1];
+					var receiver_card_num = 1111111111111111;
+					var amount = (data_splitted[1].split("="))[1];
 					
 					var query = "SELECT saldo FROM nasabah WHERE nomor_kartu=\"" + sender_card_num + "\"";
 					mysql_con.query(query,function(e, result) {
@@ -92,17 +91,15 @@ http.createServer(function(request,response){
 						response.writeHead(200);
 						if ((result[0].saldo - amount) >= 0){
 							console.log("Saldo cukup");
-							response.end("OK");
-							generate_hotp(sender_card_num);
+							response.write("OK","utf-8");
+							response.end();
+							//generate_hotp(sender_card_num);
 						} else {
 							console.log("Saldo kurang");
 							response.end();
 						}
 					});
 				});
-
-				response.writeHead(200);
-				response.end()
 			} else {
 				response.writeHead(403);
 				response.end();
