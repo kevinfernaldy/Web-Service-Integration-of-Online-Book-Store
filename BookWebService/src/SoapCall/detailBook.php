@@ -1,18 +1,11 @@
 <?php
-$client = new SoapClient("http://localhost:9901/GetBookByID/Detail?wsdl");
 
-class MyBook {
-    public $id;
-    public $title;
-    public $imageUrl;
-    public $description;
-    public $forSale;
-    public $price;
-    public $currency;
-    public $author;
-}
+$client = new SoapClient("http://localhost:9901/GetBookByID?wsdl");
+$param = array(
+    getBookByID => array (
+        'id' => $request->param['id']
+    )
+);
+$resp = $client->__soapCall("getBookByID", $param);
 
-$google_id = 'DdUKAAAAQBAJ';
-$r = $client->GetBookByID(array('arg0' => $google_id));
-var_dump($r);
 ?>
