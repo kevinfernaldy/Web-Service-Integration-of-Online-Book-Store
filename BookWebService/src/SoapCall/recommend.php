@@ -4,12 +4,12 @@ $client = new SoapClient("http://localhost:9901/GetRecomendedBook/Recommend?wsdl
 class MyBook {
     public $id;
     public $title;
-    public $authors;
+    public $imageUrl;
     public $description;
-    public $textSnippet;
-    public $list_price;
-    public $retail_price;
-    public $category_id;
+    public $forSale;
+    public $price;
+    public $currency;
+    public $author;
 }
 
 $category = '2';
