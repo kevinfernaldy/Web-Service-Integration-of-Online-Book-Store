@@ -27,7 +27,7 @@ if (isset($_COOKIE['access_token'])) {
         }
 
         // Getting book info and rating
-        $sql = "SELECT book.name, book.image, book.author, book.description, AVG(review.rating) as rating FROM review INNER JOIN book ON review.book_id = book.ID WHERE book.ID = ". $bookID;
+        $sql = "SELECT book.name, book.image, book.author, book.description, AVG(review.rating) as rating,book.harga FROM review INNER JOIN book ON review.book_id = book.ID WHERE book.ID = ". $bookID;
         $result = mysqli_query($conn, $sql);
         $book = $result->fetch_assoc();
     }
@@ -94,6 +94,7 @@ if (isset($_COOKIE['access_token'])) {
     </div>
     <div class="order-detail">
         <h3 class="nunito-order">Order</h3>
+        <div class= "price"><?php echo $book['harga'] ?></div>
         <div class="select-contain">
             <span class="nunito-jumlah"> Jumlah :</span>
             <select class="select-number" id="nb-of-books">
@@ -129,6 +130,7 @@ if (isset($_COOKIE['access_token'])) {
         <div class=\"contain-star\">
             <img src=\"../img/star-solid.png\">
             <p class=\"nunito\"><b>" . number_format((float) ($row['rating']), 1, '.', '') . " / 5.0</b></p>
+             <div class= \"price right\">".$row['harga']."
         </div>
         </div>
         ");

@@ -17,8 +17,15 @@ if (isset($_COOKIE['access_token'])) {
         header("Location: search_book.php?searchbook=". $searchbook);
         exit();
     } else {
-        $sql = "SELECT book.name as name, book.ID as ID, book.author as author, book.description as description, AVG(review.rating) as rating, COUNT(review.ID) as reviewer, book.image as image FROM book LEFT OUTER JOIN review ON book.ID = review.book_id WHERE book.name LIKE \"%". $searchbook ."%\" GROUP BY book.ID";
+        $sql = "SELECT book.name as name, book.ID as ID, book.author as author, book.description as description, AVG(review.rating) as rating, COUNT(review.ID) as reviewer, book.image as image, book.harga as harga FROM book LEFT OUTER JOIN review ON book.ID = review.book_id WHERE book.name LIKE \"%$searchbook%\" GROUP BY book.ID";
         $result = mysqli_query($conn, $sql);
+        if ($result){
+            echo "true";
+        } else {
+            echo mysqli_error($conn);
+            echo "false";
+        }
+
         $resultCheck = mysqli_num_rows($result);
         $table = array();
         while ($row = $result->fetch_assoc()) {
@@ -61,6 +68,9 @@ if (isset($_COOKIE['access_token'])) {
                     <h6 class=\"author\" >". $row['name'] . " - " . number_format((float) ($row['rating']), 1, '.', '') . " / 5.0 (" . $row['reviewer'] . " votes)</h6 >
                     <p class=\"review\" >". $row['description'] ."</p >
                 </div >
+                <div class= \"price right\">".$row['harga']."
+                </div>
+                
             </div>
             <button type = \"submit\" class=\"detail-button button submit-button\" name= \"submit\"> Detail</button >
         </form >

@@ -509,7 +509,7 @@ input {
     width: 70%;
 }
 .deskripsi-buku > h1{
-    font-size: 60px;
+    font-size: 50px;
     color: #f26600;
     margin-top: 30px;
     margin-bottom: 0;
@@ -554,7 +554,7 @@ input {
 }
 .order-detail{
     overflow: auto;
-    margin: 30px auto 10px;
+    margin: 0px auto 15px;
 }
 .order-detail > h3{
     font-size: 40px;
@@ -652,4 +652,8 @@ input {
 .nunito-reviews {
     font-family: 'Nunito', sans-serif;
     color: #0e0168;
+}
+.price{
+    font-size: 20px;
+    font-family: 'Nunito';
 }

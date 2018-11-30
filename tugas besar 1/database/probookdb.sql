@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2018 at 12:54 AM
+-- Generation Time: Nov 30, 2018 at 10:56 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -32,8 +32,17 @@ CREATE TABLE `book` (
   `ID` int(11) NOT NULL,
   `name` text NOT NULL,
   `description` text NOT NULL,
-  `author` text NOT NULL
+  `author` text NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`ID`, `name`, `description`, `author`, `image`, `harga`) VALUES
+(101, 'Fundamental of Pysics Theorem', 'Best book to study Physics theorem', 'Some1', '', 230000);
 
 -- --------------------------------------------------------
 
@@ -63,6 +72,13 @@ CREATE TABLE `transaction` (
   `book_id` int(11) NOT NULL,
   `nb_of_books` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`ID`, `date`, `user_id`, `book_id`, `nb_of_books`) VALUES
+(201, '2018-11-30', 103, 101, 1);
 
 -- --------------------------------------------------------
 
@@ -130,7 +146,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -142,7 +158,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `user`
