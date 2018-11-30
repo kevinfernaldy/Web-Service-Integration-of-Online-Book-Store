@@ -15,7 +15,7 @@ public class GetBooksByTitle {
 		String url = "https://www.googleapis.com/books/v1/volumes?q=" + url_book;
 		
 		String BooksResponseStr = HttpCon.HttpRequest.getRespondFrom(url);
-//		System.out.println(BooksResponseStr);
+		System.out.println(BooksResponseStr);
 		JSONObject jsonObj = new JSONObject(BooksResponseStr);
 		BookResponse aBookResponse = BookResponse.toBookService(jsonObj);
 		return aBookResponse.getItems();

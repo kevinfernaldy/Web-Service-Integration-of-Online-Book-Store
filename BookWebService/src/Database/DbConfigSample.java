@@ -1,3 +1,4 @@
+package Database;
 
 public class DbConfigSample {
     public static final String DB_URL = "jdbc:mysql://localhost/book_service";

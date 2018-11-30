@@ -69,19 +69,43 @@ public class Book {
     	String forSale = "";
     	String currency = "-";
     	Double price = (double) 0;
-    	
-    	id = (String) json.get("id");
-        title = json.getJSONObject("volumeInfo").getString("title");
+    	JSONArray authorsJson = new JSONArray();
+    	try {
+    		id = (String) json.get("id");
+    	} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	try {
+    		title = json.getJSONObject("volumeInfo").getString("title");
+    	} catch (Exception e) {
+			// TODO: handle exception
+		}
         
-        JSONArray authorsJson = json.getJSONObject("volumeInfo").getJSONArray("authors");
-        for (int i = 0; i < authorsJson.length(); i++) {
-            author.add((String) authorsJson.get(i));
+        try {
+        	authorsJson = json.getJSONObject("volumeInfo").getJSONArray("authors");
+        	for (int i = 0; i < authorsJson.length(); i++) {
+                author.add((String) authorsJson.get(i));
+            }
+        } catch (Exception e) {
+        	author.add("");
         }
         
-        description = (String) json.getJSONObject("volumeInfo").get("description");
-        imageUrl = (String) json.getJSONObject("volumeInfo").getJSONObject("imageLinks").get("thumbnail");
-        forSale = (String) json.getJSONObject("saleInfo").get("saleability");
+        try {
+        	description = (String) json.getJSONObject("volumeInfo").get("description");
+        } catch (Exception e) {
+        	
+        }
+        try {
+        	imageUrl = (String) json.getJSONObject("volumeInfo").getJSONObject("imageLinks").get("thumbnail");
+        } catch (Exception e) {
+        	
+        }
         
+        try {
+        	forSale = (String) json.getJSONObject("saleInfo").get("saleability");
+        } catch (Exception e) {
+        	
+        }
         if (forSale.equals("FOR_SALE")) {
         	price = (Double) json.getJSONObject("saleInfo").getJSONObject("listPrice").get("amount");
         	currency = (String) json.getJSONObject("saleInfo").getJSONObject("listPrice").get("currencyCode");

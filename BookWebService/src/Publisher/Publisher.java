@@ -12,11 +12,11 @@ public class Publisher {
 	}
 	
 	public static void getRecomendedBookPublisher() {
-		Endpoint.publish("http://localhost:9901/getRecomendedBook", new BookService.GetRecomendedBook());
+		Endpoint.publish("http://localhost:9901/GetRecomendedBook", new BookService.GetRecomendedBook());
 	}
 	
 	public static void buyBookByIDPublisher() {
-		Endpoint.publish("http://localhost:9901/buyBookByID", new BookService.BuyBookByID());
+		Endpoint.publish("http://localhost:9901/BuyBookByID", new BookService.BuyBookByID());
 	}
 	
 }
