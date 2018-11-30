@@ -1,9 +1,12 @@
 package Main;
 
+import org.json.JSONObject;
+
 import BookService.BuyBookByID;
 import BookService.GetBookByID;
 import BookService.GetBooksByTitle;
 import BookService.GetRecomendedBook;
+import JsonBook.Book;
 import JsonBook.ListBook;
 import Publisher.Publisher;
 
@@ -21,13 +24,12 @@ public class Main {
 		GetRecomendedBook s3 = new GetRecomendedBook();
 		BuyBookByID s4 = new BuyBookByID();
 		
-//		ListBook aListBook= service1.getBookByTitle("asd");
+//		ListBook aListBook= service1.getBookByTitle("magic");
 //		Book aBook = service2.getBookByID("qGCWDgAAQBAJ");
-//		ListBook bListBook = s3.getRecomendedBook("fiction");
-//		System.out.println(bListBook.getListBook().size());
+		JSONObject bListBook = s3.getRecomendedBook("Action");
+//		System.out.println(bListBook.getListBook().size())
 		
-		String resp = s4.buyBookByID("id",1 , 1, "rek", "category", 30000.00);
-		
+//		String resp = s4.buyBookByID("NKk4DwAAQBAJ", 1, "1111222233334444", "Self-Help", 30000.00, "30 November 2018");
 		
 	}
 }

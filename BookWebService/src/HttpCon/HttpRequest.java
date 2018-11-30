@@ -35,20 +35,24 @@ public class HttpRequest {
 		 }
 	public static String sendPostTo(String url_string, String param) throws Exception {
 		URL url = new URL(url_string);
+		System.out.println("S 1");
 		HttpURLConnection connection =  (HttpURLConnection) url.openConnection();
 	    connection.setRequestMethod("POST");
 	    connection.setDoOutput(true);
+	    System.out.println("S 2");
 	    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 	    wr.writeBytes(param);
 	    wr.flush();
 	    wr.close();
-	    
+	    System.out.println("S 3");
 	    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 	    StringBuffer Result = new StringBuffer();
 	    String line;  
 	    while ((line = reader.readLine()) != null){
 	    	Result.append(line);
+	    	System.out.println(line);
 	    }
+	    System.out.println("S 4");
 	    reader.close();
 	    
 	              
