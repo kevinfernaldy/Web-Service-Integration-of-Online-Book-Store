@@ -52,7 +52,7 @@ if (isset($_COOKIE['access_token'])) {
             <div class="pp-container">
                 <div class="pp-input-element nunito">
                     <label for="name">Name</label>
-                    <input type="text" class="validate name-margin nunito" name="name" value="<?php echo($row['name']) ?>"><br>
+                    <input type="text" class="validate name-margin nunito" name="name" value="<?php echo($row['name']) ?>" id="name"><br>
                 </div>
 
                 <div class="pp-input-element nunito">
@@ -63,6 +63,10 @@ if (isset($_COOKIE['access_token'])) {
                 <div class="pp-input-element nunito">
                     <label for="phone_number">Phone Number</label>
                     <input type="text" class="validate phone-margin nunito" name="phone_number" value="<?php echo($row['phone_number']) ?>" id="phone_number"><br>
+                </div>
+                <div class="pp-input-element nunito">
+                    <label for="card_number">Card Number</label>
+                    <input type="text" class="validate card-margin nunito" name="card_number" value="<?php echo($row['card_number']) ?>" id="card_number"><br>
                 </div>
             </div><br>
                 <button class="button back-button" id="b-button">Back</button>

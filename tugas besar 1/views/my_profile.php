@@ -82,6 +82,17 @@ if (isset($_COOKIE['access_token'])) {
             </div>
         </div>
 
+        <div class="space">
+            <div class="inline">
+                <img src="../img/card.png" class="left picture-frame">
+            </div>
+            <div class="inline">
+                <p class="profile-desc">Card Number</p>
+            </div>
+            <div class="inline">
+                <p class="detail-card-desc"><?php echo($row['card_number']) ?></p>
+            </div>
+        </div>        
 
     </div>
 

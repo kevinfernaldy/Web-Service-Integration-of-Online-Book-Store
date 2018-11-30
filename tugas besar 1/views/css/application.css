@@ -8,6 +8,10 @@ body {
 }
 
 /*SEARCH RESULT*/
+.form-container {
+    margin-bottom: 50px;
+}
+
 .heading-container {
     width: 100%;
 }
@@ -36,12 +40,17 @@ body {
     float: left;
 }
 
+#price_result {
+    margin-bottom: 40px;
+}
+
 .detail-button {
     width: 100px;
     height: 35px;
 }
 
 /*SEARCH BOOK*/
+
 h1{
     text-align: left;
     color: #f26600;
@@ -321,6 +330,13 @@ textarea {
     margin-bottom: 0;
 }
 
+.detail-card-desc {
+    font-family: 'Nunito', sans-serif;
+    margin-left: 97px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .solid-box {
     background-color: #065473;
     width: 750px;
@@ -482,6 +498,10 @@ input {
 .phone-margin {
     margin-left: 100px;
     margin-top: 0;
+}
+
+.card-margin {
+    margin-left: 110px;
 }
 
 #profile-address {
@@ -656,5 +676,5 @@ input {
 .price{
     font-size: 20px;
     font-family: 'Nunito';
-    color: #f26600;
+    color: red;
 }
