@@ -3,7 +3,7 @@ var url = require("url");
 var mysql = require("mysql");
 var crypto = require("crypto");
 
-var mysql_con = mysql.createConnection({host: "localhost", user: "root", password: "kevin007", port: 3307});
+var mysql_con = mysql.createConnection({host: "localhost", user: "root", password: "ekasurya1997", port: 3306});
 mysql_con.connect(function(e) {
 	if (e) throw e;
 
