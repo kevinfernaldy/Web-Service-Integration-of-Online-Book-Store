@@ -137,8 +137,11 @@ dan waktu. Pada setiap tabel, ID menjadi primary keynya.
 Konsep *shared session* dengan menggunakan arsitektur REST adalah dimana server tidak menyiimpan state apapun mengenai client session pada sisi server. Setiap request dari client ke server harus mengandung semua informasi yang dibutuhkan untuk memahami request dan tidak bisa mengambil keuntungan dari konteks apapun yang tersimpan di server. Akibatnya session state disimpan semuanya pada sisi client. Client bertanggung jawab untuk menyimpan dan menangani semua yang terkait dengan state dari aplikasi pada sisi client.
 
 ### Token dan Expiry Time
+Pertaman token disimpan di basis data. Token memiliki expiry time yang berbeda dengan expiry time cookie yang disimpan di browser. Ketika user mengakses halaman Pro Book manapun, pertama akan dilakukan pengecekan token pada browser dan database server. Apabila token tidak sama atau telah expired, maka user diharuskan untuk login kembali. Apabila user juga mengakses dari IP Address dan web browser yang berbeda, user juga diwajibkan untuk login kembali.
 
 ### Kelebihan dan Kelemahan
+Kelebihan : Lebih gampang dalam menangani file terpisah, Rest memberikan support yang lebih baik untuk browser client, secara umum REST berjalan lebih cepat.
+Kelemahan : Susah diimplementasikan, SOAP hanya menerima data dengan format XML, ketika perubahan pada WSDL dilakukan makan perubahan pada sisi client juga harus dilakukan.
 
 REST :
 1. Validasi nomor kartu : 13516109
