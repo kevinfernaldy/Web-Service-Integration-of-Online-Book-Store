@@ -27,9 +27,11 @@ if (isset($_COOKIE['access_token'])) {
         }
 
         // Getting book info and rating
-        $sql = "SELECT book.name, book.image, book.author, book.description, AVG(review.rating) as rating,book.harga FROM review INNER JOIN book ON review.book_id = book.ID WHERE book.ID = ". $bookID;
-        $result = mysqli_query($conn, $sql);
-        $book = $result->fetch_assoc();
+        header("Location:detailBook.php?id".$_POST['book-id']);
+//        $sql = "SELECT book.name, book.image, book.author, book.description, AVG(review.rating) as rating,book.harga FROM review INNER JOIN book ON review.book_id = book.ID WHERE book.ID = ". $bookID;
+//        $result = mysqli_query($conn, $sql);
+//        $book = $result->fetch_assoc();
+
     }
 } else {
     header("Location: login.php?sign-in-first-dude");

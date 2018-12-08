@@ -31,7 +31,7 @@ function makeTransaction() {
             }
         }
     };
-    xmlhttp.open("GET", "include/transaction.php?user=" + user_id + "&book=" + book_id + "&number=" + number_books, true);
+    xmlhttp.open("GET", "include/buyBook.php?id=" + user_id + "&book=" + book_id + "&number=" + number_books, true);
     xmlhttp.send();
 }
 
